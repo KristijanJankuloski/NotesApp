@@ -1,5 +1,5 @@
 ﻿using NotesApp.Domain.Models;
-using NotesApp.DTOs;
+using NotesApp.DTOs.UserDtos;
 
 namespace NotesApp.Services.Interfaces
 {
@@ -9,5 +9,6 @@ namespace NotesApp.Services.Interfaces
         Task<User> LoginUserAsync(UserLoginDto model);
         User RegisterUser(UserRegisterDto model);
         User LoginUser(UserLoginDto model);
+        //Task<User> ChangePasswordAsync(UserChangePasswordDto model);
     }
 }

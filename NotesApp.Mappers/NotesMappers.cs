@@ -1,5 +1,5 @@
 ﻿using NotesApp.Domain.Models;
-using NotesApp.DTOs;
+using NotesApp.DTOs.NotesDtos;
 
 namespace NotesApp.Mappers
 {

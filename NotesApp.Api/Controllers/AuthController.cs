@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using NotesApp.Domain.Models;
-using NotesApp.DTOs;
+using NotesApp.DTOs.UserDtos;
 using NotesApp.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

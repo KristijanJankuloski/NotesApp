@@ -1,4 +1,4 @@
-﻿namespace NotesApp.DTOs
+﻿namespace NotesApp.DTOs.UserDtos
 {
     public class UserLoginDto
     {
