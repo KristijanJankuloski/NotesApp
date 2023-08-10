@@ -1,5 +1,6 @@
 # NotesApp 📔✏️
 This is my personal project notes app example of a full-stack web application. Using C# with ASP.NET web api for the backend. And Angular with typescript for the frontend communicating via RESTful api.
+![csimage](images/cs_sm.png) ![.netimage](images/dotnet_sm.png) ![angularimage](images/angular_sm.png)
 
 ### Features ⭐
 - Entity Framework Core: The application uses Entity Framework Core as the ORM to interact with the underlying database.
