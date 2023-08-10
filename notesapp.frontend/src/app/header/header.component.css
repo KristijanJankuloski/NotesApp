@@ -1,0 +1,14 @@
+.header-container {
+    background-color: var(--color-primary);
+    display: flex;
+}
+
+.header-container > nav {
+    display: flex;
+}
+
+.navigation > ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}

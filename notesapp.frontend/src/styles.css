@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-primary: #F3F09E;
+    --color-secondary: #C3FCF2;
+    --color-accent: #007562;
+    --color-accent-alt: #00ADAC;
+    --color-accent-dark: #001A16;
+    --color-dark: #161918;
+    --color-light: #FFFDD3;
+
+    --font-text: 'Oxygen', sans-serif;;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: var(--font-text);
+}
+
+body {
+    font-size: 1.6rem;
+}
