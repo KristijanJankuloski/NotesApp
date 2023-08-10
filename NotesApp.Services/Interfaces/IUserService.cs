@@ -6,6 +6,6 @@ namespace NotesApp.Services.Interfaces
     public interface IUserService
     {
         Task DeleteUserByIdAsync(int id);
-        Task<User> ChangePasswordAsync(UserChangePasswordDto model);
+        Task<User> ChangePasswordAsync(UserChangePasswordDto model, int id);
     }
 }

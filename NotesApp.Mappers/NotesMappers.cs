@@ -1,4 +1,5 @@
-﻿using NotesApp.Domain.Models;
+﻿using NotesApp.Domain.Enums;
+using NotesApp.Domain.Models;
 using NotesApp.DTOs.NotesDtos;
 
 namespace NotesApp.Mappers
@@ -13,6 +14,7 @@ namespace NotesApp.Mappers
                 Title = note.Title,
                 Text = note.Text,
                 UserId = note.UserId,
+                Color = (int)note.Color
             };
         }
 
@@ -24,7 +26,8 @@ namespace NotesApp.Mappers
                 Title = note.Title,
                 Text = note.Text,
                 UserId = note.UserId,
-                CreateDate = note.CreationDate
+                CreateDate = note.CreationDate,
+                Color = (int)note.Color
             };
         }
 
@@ -35,7 +38,8 @@ namespace NotesApp.Mappers
                 Title = note.Title,
                 Text = note.Text,
                 UserId = note.UserId,
-                CreationDate = note.CreateDate
+                CreationDate = note.CreateDate,
+                Color = (Color)note.Color
             };
         }
     }

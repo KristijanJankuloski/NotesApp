@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NotesApp.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace NotesApp.Domain.Models
 {
@@ -10,5 +11,6 @@ namespace NotesApp.Domain.Models
         public int UserId { get; set; }
         public User User { get; set; }
         public DateTime CreationDate { get; set; }
+        public Color Color { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NotesApp.Domain.Models;
 using NotesApp.DTOs.NotesDtos;
+using NotesApp.Helpers;
 using NotesApp.Mappers;
 using NotesApp.Services.Interfaces;
 using System.Security.Claims;
@@ -23,7 +24,7 @@ namespace NotesApp.Api.Controllers
         [Authorize]
         public async Task<ActionResult<List<NoteListDto>>> Get()
         {
-            User currentUser = GetCurrentUser();
+            User currentUser = UserHelpers.GetCurrentUser(HttpContext);
             List<NoteListDto> notes = await _noteService.GetUserNotesListAsync(currentUser.Id);
             return Ok(notes);
         }
@@ -32,7 +33,7 @@ namespace NotesApp.Api.Controllers
         [Authorize]
         public async Task<ActionResult<NoteDto>> GetById(int id)
         {
-            User user = GetCurrentUser();
+            User user = UserHelpers.GetCurrentUser(HttpContext);
             try
             {
                 Note note = await _noteService.GetNoteById(id);
@@ -50,7 +51,7 @@ namespace NotesApp.Api.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteById(int id)
         {
-            User user = GetCurrentUser();
+            User user = UserHelpers.GetCurrentUser(HttpContext);
             try
             {
                 Note note = await _noteService.GetNoteById(id);
@@ -69,7 +70,7 @@ namespace NotesApp.Api.Controllers
         [Authorize]
         public async Task<IActionResult> Update([FromBody] NoteDto dto)
         {
-            User user = GetCurrentUser();
+            User user = UserHelpers.GetCurrentUser(HttpContext);
             try
             {
                 Note note = await _noteService.GetNoteById(dto.Id);
@@ -92,7 +93,7 @@ namespace NotesApp.Api.Controllers
             {
                 return BadRequest("No note provided");
             }
-            User user = GetCurrentUser();
+            User user = UserHelpers.GetCurrentUser(HttpContext);
             if (user == null)
             {
                 return BadRequest("Not logged in");
@@ -100,21 +101,20 @@ namespace NotesApp.Api.Controllers
             await _noteService.CreateNoteAsync(new NoteDto { UserId = user.Id, CreateDate = DateTime.UtcNow, Title = dto.Title, Text = dto.Text });
             return StatusCode(StatusCodes.Status201Created, "Note created");
         }
-
-        private User GetCurrentUser()
-        {
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            if (identity != null)
-            {
-                var userClaims = identity.Claims;
-                return new User
-                {
-                    Id = int.Parse(userClaims.FirstOrDefault(o => o.Type == ClaimTypes.NameIdentifier)?.Value),
-                    Username = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Name)?.Value,
-                    Email = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Email)?.Value,
-                };
-            }
-            return null;
-        }
+        //private User GetCurrentUser()
+        //{
+        //    var identity = HttpContext.User.Identity as ClaimsIdentity;
+        //    if (identity != null)
+        //    {
+        //        var userClaims = identity.Claims;
+        //        return new User
+        //        {
+        //            Id = int.Parse(userClaims.FirstOrDefault(o => o.Type == ClaimTypes.NameIdentifier)?.Value),
+        //            Username = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Name)?.Value,
+        //            Email = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Email)?.Value,
+        //        };
+        //    }
+        //    return null;
+        //}
     }
 }

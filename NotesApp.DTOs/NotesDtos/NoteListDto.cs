@@ -10,6 +10,7 @@ namespace NotesApp.DTOs.NotesDtos
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        public int Color { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
     }

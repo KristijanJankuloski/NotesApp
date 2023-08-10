@@ -22,7 +22,7 @@ namespace NotesApp.Services.Implementaitons
             await _userRepository.DeleteByIdAsync(id);
         }
 
-        public async Task<User> ChangePasswordAsync(UserChangePasswordDto model)
+        public async Task<User> ChangePasswordAsync(UserChangePasswordDto model, int id)
         {
             if (string.IsNullOrEmpty(model.OldPassword) || string.IsNullOrEmpty(model.NewPassword))
                 throw new Exception("Fields not provided");
@@ -33,7 +33,7 @@ namespace NotesApp.Services.Implementaitons
             if (model.NewPassword != model.NewPasswordRepeated)
                 throw new Exception("New password does not match");
 
-            User user = await _userRepository.GetByIdAsync(model.Id);
+            User user = await _userRepository.GetByIdAsync(id);
             if (user == null)
                 throw new Exception("No user found");
 
