@@ -1,11 +1,14 @@
 <header class="header-container">
     <nav>
         <div class="nav-brand">
-            <h3>Notes</h3>
+            <a routerLink="/">
+                <h3>Notes</h3>
+            </a>
         </div>
         <div class="navigation">
             <ul>
-                <li><a routerLink="/">Home</a></li>
+                <li><a routerLink="/">Home<img class="pencil-link-overlay" src="/assets/img/pencil.svg" alt="pencil"></a></li>
+                <li><a routerLink="/notes">Notes<img class="pencil-link-overlay" src="/assets/img/pencil.svg" alt="pencil"></a></li>
             </ul>
         </div>
     </nav>

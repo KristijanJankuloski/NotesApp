@@ -1,14 +1,62 @@
 .header-container {
     background-color: var(--color-primary);
     display: flex;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .header-container > nav {
     display: flex;
+    align-items: center;
+}
+
+.nav-brand {
+    margin-right: 2rem;
+}
+
+.nav-brand a {
+    text-decoration: none;
+}
+
+.nav-brand h3 {
+    font-size: 3.6rem;
+    font-family: var(--font-display);
+    color: var(--color-accent-alt);
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: .3px;
 }
 
 .navigation > ul {
     list-style: none;
     display: flex;
-    gap: 1rem;
+}
+
+.navigation > ul > li > a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    padding: 2rem 1rem;
+    font-weight: 600;
+    color: var(--color-accent-dark);
+    transition: all .3s ease;
+}
+
+.navigation > ul > li > a > .pencil-link-overlay {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 60px;
+    height: 30px;
+    width: 30px;
+    transition: all .3s ease;
+}
+
+.navigation > ul > li > a:hover {
+    padding: 2rem 2.2rem;
+    background-color: var(--color-light);
+}
+
+.navigation > ul > li > a:hover > .pencil-link-overlay {
+    top: 0px;
+    left: 30px;
 }
