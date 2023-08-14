@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using NotesApp.Domain.Models;
+using NotesApp.DTOs;
 using NotesApp.DTOs.UserDtos;
 using NotesApp.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
@@ -33,7 +34,7 @@ namespace NotesApp.Api.Controllers
                 User user = await _authService.RegisterUserAsync(request);
                 if (user == null)
                 {
-                    return BadRequest();
+                    return BadRequest(new ErrorDto("Someting went wrong"));
                 }
                 return Ok(user);
             }
@@ -50,7 +51,7 @@ namespace NotesApp.Api.Controllers
             User user = await _authService.LoginUserAsync(request);
             if (user == null)
             {
-                return BadRequest();
+                return BadRequest(new ErrorDto("Bad credentials"));
             }
             string token = GenerateToken(user);
             LogInResposeDto response = new LogInResposeDto()

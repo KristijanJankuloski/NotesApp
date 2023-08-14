@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NotesListComponent } from './notes-list/notes-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NoteCardComponent } from './note-card/note-card.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     LoginComponent,
     RegisterComponent,
     NotesListComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    NoteCardComponent
   ],
   imports: [
     BrowserModule,

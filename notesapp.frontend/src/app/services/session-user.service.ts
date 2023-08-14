@@ -19,4 +19,9 @@ export class SessionUserService {
     this.user = user;
     this.userSubject.next(this.user);
   }
+
+  removeUser() : void {
+    this.user = undefined;
+    this.userSubject.next(this.user);
+  }
 }

@@ -65,5 +65,9 @@
 .header-login {
     display: flex;
     align-items: center;
+}
+
+.usermng-buttons {
+    display: flex;
     gap: 1rem;
 }

@@ -101,20 +101,5 @@ namespace NotesApp.Api.Controllers
             await _noteService.CreateNoteAsync(new NoteDto { UserId = user.Id, CreateDate = DateTime.UtcNow, Title = dto.Title, Text = dto.Text });
             return StatusCode(StatusCodes.Status201Created, "Note created");
         }
-        //private User GetCurrentUser()
-        //{
-        //    var identity = HttpContext.User.Identity as ClaimsIdentity;
-        //    if (identity != null)
-        //    {
-        //        var userClaims = identity.Claims;
-        //        return new User
-        //        {
-        //            Id = int.Parse(userClaims.FirstOrDefault(o => o.Type == ClaimTypes.NameIdentifier)?.Value),
-        //            Username = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Name)?.Value,
-        //            Email = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Email)?.Value,
-        //        };
-        //    }
-        //    return null;
-        //}
     }
 }
