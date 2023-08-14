@@ -1,0 +1,16 @@
+footer {
+    text-align: center;
+    background-color: var(--color-primary);
+    padding-top: 3rem;
+}
+
+.vertical-seperator {
+    height: 1px;
+    width: 50%;
+    margin: auto;
+    background-color: var(--color-dark);
+}
+
+.legal-section {
+    padding: 3rem;
+}

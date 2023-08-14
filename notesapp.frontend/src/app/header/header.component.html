@@ -12,5 +12,11 @@
             </ul>
         </div>
     </nav>
-    <div></div>
+    <div class="header-login">
+        <div class="usermng-buttons">
+            <a *ngIf="!isLoggedIn" routerLink="/login">Log in</a>
+            <p *ngIf="isLoggedIn">Welcome {{ username }}</p>
+            <a *ngIf="isLoggedIn" href="">Log out</a>
+        </div>
+    </div>
 </header>

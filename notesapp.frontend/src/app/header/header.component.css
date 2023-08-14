@@ -8,6 +8,7 @@
 .header-container > nav {
     display: flex;
     align-items: center;
+    flex: 1;
 }
 
 .nav-brand {
@@ -59,4 +60,10 @@
 .navigation > ul > li > a:hover > .pencil-link-overlay {
     top: 0px;
     left: 30px;
+}
+
+.header-login {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }

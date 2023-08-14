@@ -12,6 +12,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "allowFrontend", builder =>
+    {
+        builder
+        .WithOrigins("*")
+        .WithMethods("GET", "POST", "PUT", "DELETE")
+        .AllowAnyHeader();
+    });
+});
+
 builder.Services.InjectDbContext(builder.Configuration.GetConnectionString("NotesAppDbString"));
 builder.Services.InjectRepositories();
 builder.Services.InjectServices();
@@ -39,6 +50,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("allowFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();

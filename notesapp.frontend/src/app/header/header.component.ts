@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SessionUserService } from '../services/session-user.service';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  username?: string;
+  isLoggedIn: boolean = false;
 
+  constructor(private sessionUser: SessionUserService){}
+  ngOnInit() {
+    this.sessionUser.getUser().subscribe((user) => {
+      if (!user){
+        this.isLoggedIn = false;
+        return;
+      }
+      this.username = user?.username;
+      this.isLoggedIn = true;
+    });
+  }
 }

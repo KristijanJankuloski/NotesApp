@@ -45,14 +45,21 @@ namespace NotesApp.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserLoginDto request)
+        public async Task<ActionResult<LogInResposeDto>> Login(UserLoginDto request)
         {
             User user = await _authService.LoginUserAsync(request);
             if (user == null)
             {
                 return BadRequest();
             }
-            return Ok(GenerateToken(user));
+            string token = GenerateToken(user);
+            LogInResposeDto response = new LogInResposeDto()
+            {
+                Username = user.Username,
+                Email = user.Email,
+                Token = token
+            };
+            return Ok(response);
         }
 
         private string GenerateToken(User user)
