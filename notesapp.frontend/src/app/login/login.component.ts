@@ -17,18 +17,19 @@ export class LoginComponent {
 
   loginFormSubmit(logIn:any) {
     let credentials : ILoginUserModel = logIn.form.value;
-    try {
-      this.api.LogInUser(credentials).subscribe( (response:any) => {
-        console.log(response.status);
-        this.local.SetJwt(response.token);
-        let user : IUser = { username: response.username, email: response.email };
-        this.local.SetCurrentUser(user);
-        this.userSession.setUser(user);
-        this.router.navigate(['/notes']);
-      });
-    }
-    catch(err){
-      console.log("cannot connect to server");
-    }
+    this.api.LogInUser(credentials).subscribe({next: this.handleResponse, error: this.handleError});
+  }
+  
+  private handleResponse(response:any){
+    console.log(response.status);
+    this.local.SetJwt(response.token);
+    let user : IUser = { username: response.username, email: response.email };
+    this.local.SetCurrentUser(user);
+    this.userSession.setUser(user);
+    this.router.navigate(['/notes']);
+  }
+
+  private handleError(error:any) {
+    console.log(error);
   }
 }

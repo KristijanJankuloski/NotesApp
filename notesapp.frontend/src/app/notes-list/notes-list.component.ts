@@ -14,7 +14,7 @@ export class NotesListComponent {
   constructor(private sessionUser: SessionUserService, private api: ApiRequestService){}
 
   ngOnInit(){
-    this.sessionUser.getUser().subscribe(user => {
+    this.sessionUser.getUser().subscribe((user) => {
       if(user){
         this.username = user.username;
         this.getNotes();
@@ -25,9 +25,14 @@ export class NotesListComponent {
   }
 
   getNotes(){
-    this.api.GetUserNotes()?.subscribe(data => {
-      console.log(data);
-      this.userNotes = data;
-    })
+    this.api.GetUserNotes()?.subscribe({next: this.handleResponse, error: this.handleError});
+  }
+  
+  private handleResponse(data:INoteListModel[]){
+    this.userNotes = data;
+  }
+
+  private handleError(error:any){
+    console.log(error);
   }
 }

@@ -1,16 +1,22 @@
 <main>
     <div class="login-container">
-        <div class="form-container">
+        <div class="login-form-container">
+            <div class="login-header">
+                <h2>Log in to Notes</h2>
+            </div>
             <form #logIn="ngForm" (ngSubmit)="loginFormSubmit(logIn)">
-                <div>
+                <div class="input-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" required placeholder="username" ngModel />
                 </div>
-                <div>
+                <div class="input-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required placeholder="password" ngModel />
                 </div>
-                <button type="submit">Log in</button>
+                <div class="input-group-submit">
+                    <div><a routerLink="/register">Register</a></div>
+                    <button type="submit">Log in</button>
+                </div>
             </form>
         </div>
     </div>

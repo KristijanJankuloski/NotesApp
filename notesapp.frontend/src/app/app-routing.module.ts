@@ -4,11 +4,13 @@ import { HomeComponent } from './home/home.component';
 import { NotesListComponent } from './notes-list/notes-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: '', component:HomeComponent },
   { path: 'notes', component: NotesListComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent},
 
   // WILDCARD 404
   { path: '**', component: PageNotFoundComponent }

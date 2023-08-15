@@ -15,6 +15,7 @@
     --color-accent-dark: #001A16;
     --color-dark: #161918;
     --color-light: #FFFDD3;
+    --color-super-light: #ffffef;
 
     --font-text: 'Oxygen', sans-serif;
     --font-display: 'Caprasimo', cursive;
@@ -27,4 +28,8 @@ html {
 
 body {
     font-size: 1.6rem;
+}
+
+main {
+    min-height: 82vh;
 }
