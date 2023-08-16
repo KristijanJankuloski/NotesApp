@@ -7,5 +7,5 @@ import INoteListModel from '../models/note-list-model';
   styleUrls: ['./note-card.component.css']
 })
 export class NoteCardComponent {
-  @Input() note: INoteListModel = { id: 0, userId: 0, color: 0, title: "", text: ""};
+  @Input() note: INoteListModel = { id: 0, userId: 0, color: 0, title: "a", text: ""};
 }

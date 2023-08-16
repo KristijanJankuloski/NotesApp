@@ -1,3 +1,15 @@
+
 <main>
-    
+    <div class="main-container">
+        <div class="note-list-header">
+            <h2>Here are your notes {{username}}</h2>
+        </div>
+        <div class="note-list-container">
+            <div *ngFor="let note of userNotes">
+                <h3>{{note.title}}</h3>
+                <p>{{note.text}}</p>
+                <app-note-card [note]="note"></app-note-card>
+            </div>
+        </div>
+    </div>
 </main>

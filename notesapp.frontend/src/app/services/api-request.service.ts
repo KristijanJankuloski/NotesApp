@@ -6,6 +6,7 @@ import ILoginUserModel from '../models/login-user';
 import { LocalStorageService } from './local-storage.service';
 import INoteListModel from '../models/note-list-model';
 import { Observable, catchError, throwError } from 'rxjs';
+import ILogInResponse from '../models/login-response';
 
 @Injectable({
   providedIn: 'root'
@@ -28,15 +29,14 @@ export class ApiRequestService {
   }
 
   public LogInUser(model: ILoginUserModel){
-    return this.http.post(`${environment.apiBaseUrl}/auth/login`, model).pipe(catchError(this.errorHandler));
+    return this.http.post<ILogInResponse>(`${environment.apiBaseUrl}/auth/login`, model).pipe(catchError(this.errorHandler));
   }
 
   public GetUserNotes() : Observable<INoteListModel[]>{
     const token = this.local.GetJwt();
     if(!token)
       throw new Error("No token");
-    let headers = new HttpHeaders();
-    headers.append("Authorization", `Bearer ${token}`);
-    return this.http.get<INoteListModel[]>(`${environment.apiBaseUrl}/notes`, {headers: headers}).pipe(catchError(this.errorHandler));
+    const headers = {'Authorization': `Bearer ${token}`};
+    return this.http.get<INoteListModel[]>(`${environment.apiBaseUrl}/notes`, {headers}).pipe(catchError(this.errorHandler));
   }
 }

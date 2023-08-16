@@ -19,8 +19,10 @@ export class NotesListComponent {
         this.username = user.username;
         this.getNotes();
       }
-      this.userNotes = [];
-      this.username = undefined;
+      else {
+        this.userNotes = [];
+        this.username = undefined;
+      }
     });
   }
 
