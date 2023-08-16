@@ -1,0 +1,32 @@
+.note-card-header {
+    background-color: rgba(0, 0, 0, 0.10);
+    padding: 12px;
+}
+
+.note-card-body {
+    padding: 8px;
+}
+
+.card-red {
+    background-color: var(--color-card-red);
+}
+
+.card-green {
+    background-color: var(--color-card-green);
+}
+
+.card-blue {
+    background-color: var(--color-card-blue);
+}
+
+.card-yellow {
+    background-color: var(--color-card-yellow);
+}
+
+.card-purple {
+    background-color: var(--color-card-purple);
+}
+
+.card-orange {
+    background-color: var(--color-card-orange);
+}

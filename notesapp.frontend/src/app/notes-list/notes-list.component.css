@@ -1,0 +1,10 @@
+.note-list-container {
+    padding: 24px 48px;
+    display: flex;
+}
+
+.not-logged-in {
+    padding-top: 24px;
+    display: grid;
+    place-items: center;
+}

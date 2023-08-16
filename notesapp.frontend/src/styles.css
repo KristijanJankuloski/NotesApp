@@ -17,6 +17,13 @@
     --color-light: #FFFDD3;
     --color-super-light: #ffffef;
 
+    --color-card-red: #FDAAAA;
+    --color-card-green: #C8E1CC;
+    --color-card-blue: #A9E5FF;
+    --color-card-yellow: #FFFDD3;
+    --color-card-purple: #D9C4EC;
+    --color-card-orange: #FFCCA9;
+
     --font-text: 'Oxygen', sans-serif;
     --font-display: 'Caprasimo', cursive;
 }

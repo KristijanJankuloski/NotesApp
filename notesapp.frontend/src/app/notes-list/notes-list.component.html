@@ -1,15 +1,17 @@
 
 <main>
-    <div class="main-container">
+    <div *ngIf="username" class="main-container">
         <div class="note-list-header">
             <h2>Here are your notes {{username}}</h2>
         </div>
         <div class="note-list-container">
             <div *ngFor="let note of userNotes">
-                <h3>{{note.title}}</h3>
-                <p>{{note.text}}</p>
                 <app-note-card [note]="note"></app-note-card>
             </div>
         </div>
+    </div>
+    <div *ngIf="!username" class="not-logged-in">
+        <h1>You are not logged in</h1>
+        <h4>Please <a routerLink="/login">login</a> to see your notes</h4>
     </div>
 </main>
