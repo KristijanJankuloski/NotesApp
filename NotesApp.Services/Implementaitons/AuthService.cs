@@ -16,6 +16,12 @@ namespace NotesApp.Services.Implementaitons
             _userRepository = userRepository;
         }
 
+        public async Task<bool> CheckToken(int userId, string token)
+        {
+            User user = await _userRepository.GetByIdAsync(userId);
+            return user.LastToken == token;
+        }
+
         public User LoginUser(UserLoginDto model)
         {
             User user = RegisterUser(new UserRegisterDto() { Username = model.Username, Email = "test@email.com", Password = model.Password, PasswordRepeated = model.Password });
@@ -33,7 +39,7 @@ namespace NotesApp.Services.Implementaitons
             {
                 return null;
             }
-            if(!PasswordHelper.VerifyPassword(model.Password, foundUser.PasswordHash, foundUser.PasswordSalt))
+            if (!PasswordHelper.VerifyPassword(model.Password, foundUser.PasswordHash, foundUser.PasswordSalt))
             {
                 return null;
             }
@@ -57,16 +63,27 @@ namespace NotesApp.Services.Implementaitons
 
         public async Task<User> RegisterUserAsync(UserRegisterDto model)
         {
-            if(model.Password != model.PasswordRepeated)
+            if (model.Password != model.PasswordRepeated)
             {
                 return null;
             }
             User user = model.ToUser();
             PasswordHelper.CreatePasswordHash(model.Password, out byte[] passHash, out byte[] passSalt);
             user.PasswordHash = passHash;
-            user.PasswordSalt= passSalt;
+            user.PasswordSalt = passSalt;
             await _userRepository.InsertAsync(user);
             return user;
+        }
+
+        public async Task UpdateLastToken(int userId, string token)
+        {
+            User user = await _userRepository.GetByIdAsync(userId);
+            if (user == null)
+            {
+                return;
+            }
+            user.LastToken = token;
+            await _userRepository.UpdateAsync(user);
         }
     }
 }

@@ -12,12 +12,18 @@ export class LocalStorageService {
     return localStorage.getItem("Token");
   }
 
-  public SetJwt(token: string) : void {
+  public GetRefreshToken() : string | null {
+    return localStorage.getItem("RefreshToken");
+  }
+
+  public SetJwt(token: string, refresh: string) : void {
     localStorage.setItem("Token", token);
+    localStorage.setItem("RefreshToken", refresh);
   }
 
   public RemoveJwt() : void{
     localStorage.removeItem("Token");
+    localStorage.removeItem("RefreshToken");
   }
 
   public GetCurrentUser() : IUser | null{

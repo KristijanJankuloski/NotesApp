@@ -9,6 +9,8 @@ namespace NotesApp.Services.Interfaces
         Task<User> LoginUserAsync(UserLoginDto model);
         User RegisterUser(UserRegisterDto model);
         User LoginUser(UserLoginDto model);
+        Task UpdateLastToken(int userId,  string token);
+        Task<bool> CheckToken(int userId, string token);
         //Task<User> ChangePasswordAsync(UserChangePasswordDto model);
     }
 }

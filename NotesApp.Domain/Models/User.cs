@@ -12,5 +12,6 @@ namespace NotesApp.Domain.Models
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public List<Note> Notes { get; set; } = new();
+        public string? LastToken { get; set; }
     }
 }

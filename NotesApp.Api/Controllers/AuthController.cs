@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using NotesApp.Domain.Models;
 using NotesApp.DTOs;
 using NotesApp.DTOs.UserDtos;
+using NotesApp.Helpers;
 using NotesApp.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -48,22 +49,65 @@ namespace NotesApp.Api.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<LogInResposeDto>> Login(UserLoginDto request)
         {
-            User user = await _authService.LoginUserAsync(request);
-            if (user == null)
+            try
             {
-                return BadRequest(new ErrorDto("Bad credentials"));
+                User user = await _authService.LoginUserAsync(request);
+                if (user == null)
+                {
+                    return BadRequest(new ErrorDto("Bad credentials"));
+                }
+                string token = GenerateToken(user, 1);
+                string refreshToken = GenerateToken(user, 30, true);
+                await _authService.UpdateLastToken(user.Id, token);
+                LogInResposeDto response = new LogInResposeDto()
+                {
+                    Username = user.Username,
+                    Email = user.Email,
+                    Token = token,
+                    RefreshToken = refreshToken
+                };
+                return Ok(response);
             }
-            string token = GenerateToken(user);
-            LogInResposeDto response = new LogInResposeDto()
+            catch (Exception ex)
             {
-                Username = user.Username,
-                Email = user.Email,
-                Token = token
-            };
-            return Ok(response);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
 
-        private string GenerateToken(User user)
+        [Authorize]
+        [HttpPost("token-refresh")]
+        public async Task<ActionResult<LogInResposeDto>> RefreshToken(TokenRefreshDto dto)
+        {
+            try
+            {
+                User user = UserHelpers.GetCurrentUser(HttpContext);
+                if (user == null)
+                {
+                    return StatusCode(StatusCodes.Status401Unauthorized);
+                }
+                if (!await _authService.CheckToken(user.Id, dto.LastToken))
+                {
+                    return StatusCode(StatusCodes.Status401Unauthorized);
+                }
+                string token = GenerateToken(user, 15);
+                string refreshToken = GenerateToken(user, 30, true);
+                LogInResposeDto response = new LogInResposeDto()
+                {
+                    Username = user.Username,
+                    Email = user.Email,
+                    Token = token,
+                    RefreshToken = refreshToken
+                };
+                await _authService.UpdateLastToken(user.Id, token);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        private string GenerateToken(User user, int timeout, bool refresh = false)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var creds = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -78,7 +122,7 @@ namespace NotesApp.Api.Controllers
             var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
                 _configuration["Jwt:Audience"],
                 claims,
-                expires: DateTime.Now.AddHours(1),
+                expires: refresh ? DateTime.Now.AddDays(timeout) : DateTime.Now.AddMinutes(timeout),
                 signingCredentials: creds);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

@@ -38,8 +38,9 @@ export class NotesListComponent {
 
   handleError = (error:any) => {
     if(error.status === 401){
-      this.sessionUser.removeUser();
-      this.router.navigate(["/login"]);
+      console.log("Token expired");
+      this.api.RefreshToken();
+      this.getNotes();
     }
     console.log(error);
   }

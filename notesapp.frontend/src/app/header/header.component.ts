@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SessionUserService } from '../services/session-user.service';
 import { LocalStorageService } from '../services/local-storage.service';
+import { ApiRequestService } from '../services/api-request.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ export class HeaderComponent {
   username?: string;
   isLoggedIn: boolean = false;
 
-  constructor(private sessionUser: SessionUserService, private local: LocalStorageService){}
+  constructor(private sessionUser: SessionUserService, private local: LocalStorageService, private api: ApiRequestService){}
   ngOnInit() {
     this.sessionUser.getUser().subscribe((user) => {
       if (!user){
@@ -24,8 +25,6 @@ export class HeaderComponent {
   }
 
   logOutClick() {
-    this.local.DeleteCurrentUser();
-    this.sessionUser.removeUser();
-    this.local.RemoveJwt();
+    this.api.logout();
   }
 }

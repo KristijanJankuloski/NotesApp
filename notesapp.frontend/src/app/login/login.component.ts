@@ -19,19 +19,15 @@ export class LoginComponent {
   loginFormSubmit(logIn:any) {
     let credentials : ILoginUserModel = logIn.form.value;
     this.api.LogInUser(credentials).subscribe({next: (response: ILogInResponse) => {
-      console.log(response.token);
-      this.localStorageService.SetJwt(response.token);
+      this.localStorageService.SetJwt(response.token, response.refreshToken);
       let user : IUser = { username: response.username, email: response.email };
       this.localStorageService.SetCurrentUser(user);
       this.userSession.setUser(user);
       this.router.navigate(['/notes']);
     }, error: this.handleError});
   }
-  
-  private handleResponse(response:ILogInResponse){
-  }
 
-  private handleError(error:any) {
+  private handleError = (error:any) => {
     console.log(error);
   }
 }
