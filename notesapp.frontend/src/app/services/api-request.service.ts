@@ -40,6 +40,10 @@ export class ApiRequestService {
     this.router.navigate(['login']);
   }
 
+  get isLoggedIn() {
+    return !!this.local.GetJwt();
+  }
+
   public RegisterUser(model: IRegisterUserModel) {
     return this.http.post(`${environment.apiBaseUrl}/auth/register`, model).pipe(catchError(this.errorHandler));
   }
